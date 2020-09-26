@@ -14,14 +14,14 @@ class Ship:
         #  Load the ship image and get its rect.
 
         self.image = pygame.image.load('images/rocket_ship.bmp')
-        self.image = pygame.transform.scale(self.image, (50, 50)) #  resizes the ship image
+        self.image = pygame.transform.scale(self.image, (85, 100)) #  resizes the ship image
         self.rect = self.image.get_rect()
 
 
         #  Start each new ship at the bottom center of the screen.
         self.rect.midbottom = self.screen_rect.midbottom
 
-        self.x = float(self.rect.x)
+        self.x = float(self.rect.x) #x-coordinate of the ship's rect/image
 
         self.moving_right = False
         self.moving_left = False
@@ -31,9 +31,9 @@ class Ship:
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        if self.moving_right:
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
-        if self.moving_left:
+        if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
 
         self.rect.x = self.x
